@@ -116,8 +116,10 @@ for loop in range(0,LOOPS):
         bh1745.leds(False)
         led = "LED:        Off"
         ledOn = False
-        
+    
+    time.sleep(.5)  
     rgbc_raw, rgb_clamped, brightness, anylight = sensorRead()
+    time.sleep(.5)
     bh1745.leds(False)
 
     if not ledOn and anylight:
