@@ -12,6 +12,8 @@ The device is about an 30mm * 30mm * 15 mm. The aim is to have a second version 
 
 To operate, the device is switched on it is place inside the camera the rear cover is closed. After a delay the device will make a series of light readings over a few minutes and will store them in a file call results.txt. This file can then be viewed on a computer.
 
+At the end of the test run the Leds on the Tiny2040 are also set to RED for light detected (Fail) or Green for light not detected (Pass). These LED'scan be viwed thru the back of the case.
+
 ### *** This is a work in progress ***
 
 ### *** I am not a coder or programer, so please excuse the chaos ***
