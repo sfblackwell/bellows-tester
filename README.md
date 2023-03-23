@@ -6,7 +6,7 @@ This is a small device for testing the light tighness of vintage cameras.
 
 Vintage cameras often use cloth bellows and light seals. These wear over time and can start to allow light through which can spoil the film in the camera
 
-This is the first prototype of a device thta can be placed inside the camera to detect any light leakage. 
+This is the first prototype of a device that can be placed inside the camera to detect any light leakage. 
 
 The device is about an 30mm * 30mm * 15 mm. The aim is to have a second version that is about 20mm * 25 * 10mm.
 
