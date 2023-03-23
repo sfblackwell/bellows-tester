@@ -6,10 +6,12 @@ import pimoroni_i2c
 import breakout_bh1745
 import machine 
 
+CONSOLE  = True
+
 START_LEDS	 = False
-START_DELAY  = 20
-LOOPS        = 30
-LOOPS_LIGHTS = 5
+START_DELAY  = 5
+LOOPS        = 10
+LOOPS_LIGHTS = 2
 LED_ON_LOW   = LOOPS_LIGHTS
 LED_ON_HIGH  = (LOOPS - LOOPS_LIGHTS) - 1
 
@@ -27,24 +29,37 @@ try:
 except:
     print("===> No sensor found") 
 
-def sensorRead():
+def sensorRead():  
     
     rgbc_raw = bh1745.rgbc_raw()
     rgb_clamped = bh1745.rgbc_clamped()
     brightness=rgbc_raw[3]
+    
+    if rgbc_raw[0] > 0 or rgbc_raw[1] > 0 or rgbc_raw[2] > 0 or rgbc_raw[3] > 0 or rgb_clamped[0] > 0 or rgb_clamped[1] > 0 or rgb_clamped[2] > 0 or rgb_clamped[3] > 0:
+        anythingSeen = True
+    else:
+        anythingSeen = False
 
-    return rgbc_raw, rgb_clamped, brightness
+    return rgbc_raw, rgb_clamped, brightness, anythingSeen
 
-def writeResult(loopy, ts, raw, clamped, bright, led, delimit):
+def writeLineResult(loopy, ts, raw, clamped, bright, led, anyLightText, delimit):
     
     f = open("result.txt", "a")
-    
     f.write(loopy + "\n")
     f.write(ts + "\n")
     f.write(led + "\n")
     f.write(raw + "\n")
     f.write(clamped + "\n")
     f.write(bright + "\n")
+    if anyLightText != "":
+        f.write(anyLightText + "\n")
+    f.write(delimit + "\n")
+    f.close()
+    
+def writeFinalResult(anyLightText, delimit):
+    
+    f = open("result.txt", "a") 
+    f.write(anyLightText + "\n")
     f.write(delimit + "\n")
     f.close()
 
@@ -73,19 +88,15 @@ else:
     g.value(True)
     b.value(True)
 
-print("Startup wait: ", START_DELAY)
-time.sleep(START_DELAY)
+if CONSOLE:
+    print("Startup wait: ", START_DELAY)
+    for i in range(START_DELAY):
+        print("Wait: ", i)
+        time.sleep(1)
+
+anyLightAtAll = False
 
 for loop in range(0,LOOPS):
-    
-    if loop < LED_ON_LOW or loop > LED_ON_HIGH:
-        bh1745.leds(True)
-        led = "LED:        On"
-    else:
-        bh1745.leds(False)
-        led = "LED:        Off"
-    
-    time.sleep(.5)
     
     if loop == 0:
         loopy =         DELIMITER0 + "\n"
@@ -95,23 +106,63 @@ for loop in range(0,LOOPS):
         loopy = ""
     
     loopy = loopy + "Loop:       {}".format(loop)
-    ts 	  = "TS:         {}".format(utime.time())
-   
-    rgbc_raw, rgb_clamped, brightness = sensorRead()
+    ts 	  = "TS:         {}".format(utime.time())  
+    
+    if loop < LED_ON_LOW or loop > LED_ON_HIGH:
+        bh1745.leds(True)
+        led = "LED:        On"
+        ledOn = True
+    else:
+        bh1745.leds(False)
+        led = "LED:        Off"
+        ledOn = False
+        
+    rgbc_raw, rgb_clamped, brightness, anylight = sensorRead()
+    bh1745.leds(False)
 
+    if not ledOn and anylight:
+        anyLightAtAll = True
+        anyLightText = "Light Detected"
+    elif not ledOn :
+        anyLightText = "Light NOT Detected"
+    else:
+        anyLightText = ""
+                
     raw 	= "Raw:        {}, {}, {}, {}".format(*rgbc_raw)
     clamped = "Clamped:    {}, {}, {}, {}".format(*rgb_clamped)
     bright  = "Brightness: {}".format(brightness)
     delimit = DELIMITER1
     
-    writeResult(loopy, ts, raw, clamped, bright, led, delimit)
-    print(loopy)
-    print(ts)
-    print(led)
-    print(raw)
-    print(clamped)
-    print(bright)
-    print(delimit)
+    writeLineResult(loopy, ts, raw, clamped, bright, led, anyLightText, delimit)
+    
+    if CONSOLE:
+        print(loopy)
+        print(ts)
+        print(led)
+        print(raw)
+        print(clamped)
+        print(bright)
+        if anyLightText != "":
+            print(anyLightText) 
+        print(delimit)
+        
     time.sleep(LOOP_WAIT)
 
 bh1745.leds(False)
+
+#	print final result to file, console and display result on back of case  
+
+if anyLightAtAll:
+    anyLightText = "Light Detected"
+    r.value(False)
+    g.value(True)
+    b.value(True)
+else:
+    anyLightText = "Light NOT Detected"
+    r.value(True)
+    g.value(False)
+    b.value(True)
+
+if CONSOLE:
+    print(anyLightText)
+    writeFinalResult(anyLightText, delimit)
