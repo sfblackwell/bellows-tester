@@ -19,11 +19,11 @@ At the end of the test run the Leds on the Tiny2040 are also set to RED for ligh
 ### *** I am not a coder or programer, so please excuse the chaos ***
 
 ### Items Used:
-- Processor [Tiny2040 RP2040 development board](https://shop.pimoroni.com/products/tiny-2040?variant=39560012234835)
-- I2C Sensor [BH1745 Luminance and Colour Sensor Breakout](https://shop.pimoroni.com/products/bh1745-luminance-and-colour-sensor-breakout)
-- Battery [Adafruit 20mm Coin Cell Breakout w/On-Off](https://shop.pimoroni.com/products/adafruit-20mm-coin-cell-breakout-w-on-off-switch-cr2032?variant=821160901)
-- Language [Micropython pimoroni-tiny2040-v1.19.16-micropython] (https://github.com/pimoroni/pimoroni-pico/releases/download/v1.19.17/pimoroni-tiny2040-v1.19.17-micropython.uf2)
-- Case [Adapted 3d Printed Case ](https://www.printables.com/model/166430-case-for-adafruit-qt-py-rp2040-and-seeed-xiao-rp20)
+- Processor   [Tiny2040 RP2040 development board](https://shop.pimoroni.com/products/tiny-2040?variant=39560012234835)
+- I2C Sensor  [BH1745 Luminance and Colour Sensor Breakout](https://shop.pimoroni.com/products/bh1745-luminance-and-colour-sensor-breakout)
+- Battery     [Adafruit 20mm Coin Cell Breakout w/On-Off](https://shop.pimoroni.com/products/adafruit-20mm-coin-cell-breakout-w-on-off-switch-cr2032?variant=821160901)
+- Micropython [pimoroni-tiny2040-v1.19.16-micropython](https://github.com/pimoroni/pimoroni-pico/releases/download/v1.19.17/pimoroni-tiny2040-v1.19.17-micropython.uf2)
+- Case        [Adapted 3d Printed Case ](https://www.printables.com/model/166430-case-for-adafruit-qt-py-rp2040-and-seeed-xiao-rp20)
 
 ![trilobot plus controller half](https://user-images.githubusercontent.com/122044826/212179922-8c774104-d420-4df5-91af-77403d0690f8.jpg)
 
