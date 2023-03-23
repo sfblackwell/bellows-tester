@@ -1,5 +1,6 @@
-# bellows-tester
-# Simons @pimoroni Tiny2040 / BH1745 Based Vintage Camera Bellows Light Tighness Tester
+# Bellows Tester
+
+## Simons @pimoroni Tiny2040 / BH1745 Based Vintage Camera Bellows Light Tighness Tester
 
 This is a small device for testing the light tighness of vintage cameras.
 
