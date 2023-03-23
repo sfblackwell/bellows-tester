@@ -79,3 +79,165 @@ Brightness: 0
 ===============================
 Light NOT Detected
 ===============================
+*******************************
+Start of test
+*******************************
+Loop:       0
+TS:         1679611549
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+===============================
+Loop:       1
+TS:         1679611552
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    58, 166, 255, 780
+Brightness: 0
+===============================
+Loop:       2
+TS:         1679611556
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       3
+TS:         1679611559
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       4
+TS:         1679611563
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       5
+TS:         1679611566
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       6
+TS:         1679611570
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       7
+TS:         1679611573
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       8
+TS:         1679611577
+LED:        On
+Raw:        0, 0, 0, 860
+Clamped:    53, 153, 255, 860
+Brightness: 860
+===============================
+Loop:       9
+TS:         1679611580
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    53, 153, 255, 860
+Brightness: 0
+===============================
+Light NOT Detected
+===============================
+*******************************
+Start of test
+*******************************
+Loop:       0
+TS:         1679611645
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+===============================
+Loop:       1
+TS:         1679611648
+LED:        On
+Raw:        0, 0, 0, 720
+Clamped:    67, 182, 255, 720
+Brightness: 720
+===============================
+Loop:       2
+TS:         1679611652
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       3
+TS:         1679611655
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       4
+TS:         1679611659
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       5
+TS:         1679611662
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       6
+TS:         1679611666
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       7
+TS:         1679611669
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       8
+TS:         1679611673
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    67, 182, 255, 720
+Brightness: 0
+===============================
+Loop:       9
+TS:         1679611676
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    66, 182, 255, 720
+Brightness: 0
+===============================
+Light NOT Detected
+===============================
