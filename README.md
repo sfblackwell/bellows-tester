@@ -10,6 +10,8 @@ This is the first prototype of a device thta can be placed inside the camera to 
 
 The device is about an 30mm * 30mm * 15 mm. The aim is to have a second version that is about 20mm * 25 * 10mm.
 
+To operate, the device is switched on it is place inside the camera the rear cover is closed. After a delay the device will make a series of light readings over a few minutes and will store them in a file call results.txt. This file can then be viewed on a computer.
+
 ### *** This is a work in progress ***
 
 ### *** I am not a coder or programer, so please excuse the chaos ***
