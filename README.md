@@ -1,4 +1,4 @@
-# Camera Bellows Tester
+# Vintage-Camera Bellows Tester
 
 ## Simons @pimoroni Tiny2040 / BH1745 Based Vintage Camera Bellows Light Tighness Tester
 
