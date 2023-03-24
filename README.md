@@ -1,4 +1,4 @@
-# Bellows Tester
+# Camera Bellows Tester
 
 ## Simons @pimoroni Tiny2040 / BH1745 Based Vintage Camera Bellows Light Tighness Tester
 
@@ -28,3 +28,6 @@ At the end of the test run the Leds on the Tiny2040 are also set to RED for ligh
 ![trilobot plus controller half](https://user-images.githubusercontent.com/122044826/212179922-8c774104-d420-4df5-91af-77403d0690f8.jpg)
 
 
+![20230324_135119125_iOS](https://user-images.githubusercontent.com/122044826/227642407-843ad5ec-a6f5-407f-bb45-164e608e82d9.jpg)
+![20230324_135301384_iOS](https://user-images.githubusercontent.com/122044826/227642459-a4f7790e-5281-4e06-8a58-ace708a922fd.jpg)
+![20230324_135310196_iOS](https://user-images.githubusercontent.com/122044826/227642494-7d36fbde-0669-421d-8733-bbbd3a3d185d.jpg)
