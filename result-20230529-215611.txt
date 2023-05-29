@@ -1,0 +1,81 @@
+*******************************
+Start of test
+*******************************
+Loop:       0
+TS:         21:56:11 2023/05/29
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+===============================
+Loop:       1
+TS:         21:56:14 2023/05/29
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    117, 239, 255, 340
+Brightness: 0
+===============================
+Loop:       2
+TS:         21:56:18 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       3
+TS:         21:56:21 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       4
+TS:         21:56:25 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       5
+TS:         21:56:28 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       6
+TS:         21:56:32 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       7
+TS:         21:56:35 2023/05/29
+LED:        Off
+Raw:        0, 0, 0, 0
+Clamped:    0, 0, 0, 0
+Brightness: 0
+Light NOT Detected
+===============================
+Loop:       8
+TS:         21:56:39 2023/05/29
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    124, 239, 255, 340
+Brightness: 0
+===============================
+Loop:       9
+TS:         21:56:42 2023/05/29
+LED:        On
+Raw:        0, 0, 0, 0
+Clamped:    117, 239, 255, 340
+Brightness: 0
+===============================
+Light NOT Detected
+===============================

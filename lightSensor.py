@@ -1,3 +1,8 @@
+DEBUG  = True
+#DEBUG  = False
+
+if DEBUG: print("\n===> Starting Bellows Light Sensor Code\n")
+
 import time
 import utime
 import os
@@ -6,28 +11,34 @@ import pimoroni_i2c
 import breakout_bh1745
 import machine 
 
-CONSOLE  = True
-
 START_LEDS	 = False
-START_DELAY  = 5
+START_DELAY  = 20
 LOOPS        = 10
 LOOPS_LIGHTS = 2
 LED_ON_LOW   = LOOPS_LIGHTS
 LED_ON_HIGH  = (LOOPS - LOOPS_LIGHTS) - 1
 
+READING_WAIT = 0.5
 LOOP_WAIT    = 2
-FLASH_LOOPS  = 4
+
+LED_SLEEP    = 0.5
+FLASH_LOOPS  = 5
 
 DELIMITER0 = "*******************************"
 DELIMITER1 = "==============================="
+
+estTime = START_DELAY + (LOOPS * (LOOP_WAIT + READING_WAIT + READING_WAIT))
+if DEBUG: print("===> Estimated test duration once sensor LED's stop flashing", estTime)
 
 try:
     LIGHTSENSOR = {"sda": 0, "scl": 1}
     I2C = pimoroni_i2c.PimoroniI2C(**LIGHTSENSOR)
     bh1745 = breakout_bh1745.BreakoutBH1745(I2C)
     bh1745.leds(False)
+    if DEBUG: print("===> BH1745 Sensor found")
 except:
-    print("===> No sensor found") 
+    print("===> No sensor found")
+    sys.exit("No sensor found, Cannot continue")
 
 def sensorRead():  
     
@@ -42,9 +53,9 @@ def sensorRead():
 
     return rgbc_raw, rgb_clamped, brightness, anythingSeen
 
-def writeLineResult(loopy, ts, raw, clamped, bright, led, anyLightText, delimit):
+def writeLineResult(resultsFile, loopy, ts, raw, clamped, bright, led, anyLightText, delimit):
     
-    f = open("result.txt", "a")
+    f = open(resultsFile, "a")
     f.write(loopy + "\n")
     f.write(ts + "\n")
     f.write(led + "\n")
@@ -56,48 +67,66 @@ def writeLineResult(loopy, ts, raw, clamped, bright, led, anyLightText, delimit)
     f.write(delimit + "\n")
     f.close()
     
-def writeFinalResult(anyLightText, delimit):
+def writeFinalResult(resultsFile, anyLightText, delimit):
     
-    f = open("result.txt", "a") 
+    f = open(resultsFile, "a") 
     f.write(anyLightText + "\n")
     f.write(delimit + "\n")
     f.close()
 
-#	setup and flash leds at startup
+#
+#	setup and flash leds at startup to show unit is alive and kicking
+#
 
 r = machine.Pin(18, machine.Pin.OUT)
 g = machine.Pin(19, machine.Pin.OUT)
 b = machine.Pin(20, machine.Pin.OUT)
 
-if START_LEDS:
-    for i in range(FLASH_LOOPS):
-        r.value(False)
-        g.value(False)
-        b.value(False)
-        bh1745.leds(False)
-        time.sleep(0.5)
-        r.value(True)
-        g.value(True)
-        b.value(True)
-        bh1745.leds(True)
-        time.sleep(0.5)
-    bh1745.leds(False)
-else:
-    bh1745.leds(False)
-    r.value(True)
-    g.value(True)
-    b.value(True)
+#	True is OFF
 
-if CONSOLE:
-    print("Startup wait: ", START_DELAY)
-    for i in range(START_DELAY):
-        print("Wait: ", i)
-        time.sleep(1)
+r.value(True)
+g.value(True)
+b.value(True)
+
+#	Flash the sensor LED
+
+for i in range(FLASH_LOOPS):
+    bh1745.leds(True)
+    time.sleep(LED_SLEEP)
+    bh1745.leds(False)
+    time.sleep(LED_SLEEP)
+
+#
+#	lets wait while user gets set up
+#
+
+if DEBUG: print("===> Startup wait: ", START_DELAY)
+for i in range(START_DELAY):
+    if DEBUG: print(".",end="")
+    time.sleep(1)
+if DEBUG: print("")
+if DEBUG: print("\n")
+#
+#	setup for a date-time based file name
+#
+
+pyear, pmonth, pday, phour, pminute, psecond, pweekday, pyearday = time.localtime()
+timeString  = "result-{:04}{:02}{:02}-{:02}{:02}{:02}.txt"
+resultsFile = timeString.format(pyear, pmonth, pday, phour, pminute, psecond)
+if DEBUG: print("Results file name: ", resultsFile)
+
+#
+#	into the main loop
+#
 
 anyLightAtAll = False
 
 for loop in range(0,LOOPS):
     
+    #
+    #	header for each loop
+    #
+
     if loop == 0:
         loopy =         DELIMITER0 + "\n"
         loopy = loopy + "Start of test\n"
@@ -106,7 +135,10 @@ for loop in range(0,LOOPS):
         loopy = ""
     
     loopy = loopy + "Loop:       {}".format(loop)
-    ts 	  = "TS:         {}".format(utime.time())  
+    
+    pyear, pmonth, pday, phour, pminute, psecond, pweekday, pyearday = time.localtime()
+    timeString = "TS:         {:02}:{:02}:{:02} {:04}/{:02}/{:02}"
+    ts     = timeString.format(phour, pminute, psecond, pyear, pmonth, pday)
     
     if loop < LED_ON_LOW or loop > LED_ON_HIGH:
         bh1745.leds(True)
@@ -117,11 +149,15 @@ for loop in range(0,LOOPS):
         led = "LED:        Off"
         ledOn = False
     
-    time.sleep(.5)  
+    #	get a light reading
+ 
+    time.sleep(READING_WAIT)  
     rgbc_raw, rgb_clamped, brightness, anylight = sensorRead()
-    time.sleep(.5)
+    time.sleep(READING_WAIT)
     bh1745.leds(False)
 
+    #	set up results text
+    
     if not ledOn and anylight:
         anyLightAtAll = True
         anyLightText = "Light Detected"
@@ -135,9 +171,11 @@ for loop in range(0,LOOPS):
     bright  = "Brightness: {}".format(brightness)
     delimit = DELIMITER1
     
-    writeLineResult(loopy, ts, raw, clamped, bright, led, anyLightText, delimit)
+    writeLineResult(resultsFile, loopy, ts, raw, clamped, bright, led, anyLightText, delimit)
     
-    if CONSOLE:
+    #	console text if needed
+    
+    if DEBUG:
         print(loopy)
         print(ts)
         print(led)
@@ -150,21 +188,31 @@ for loop in range(0,LOOPS):
         
     time.sleep(LOOP_WAIT)
 
+#	all done, turn of led
+
 bh1745.leds(False)
 
-#	print final result to file, console and display result on back of case  
+#	print final result to file, console and display result on back of case
+
+#	ANY light detected = BH1745 sensor LED will be ON  & Tiny2040 LED will be RED
+
+#	NO light detected  = BH1745 sensor LED will be OFF & Tiny2040 LED will be GREEN
 
 if anyLightAtAll:
     anyLightText = "Light Detected"
     r.value(False)
     g.value(True)
     b.value(True)
+    
+    bh1745.leds(True)
 else:
     anyLightText = "Light NOT Detected"
     r.value(True)
     g.value(False)
     b.value(True)
+    
+    bh1745.leds(False)
 
-if CONSOLE:
-    print(anyLightText)
-    writeFinalResult(anyLightText, delimit)
+writeFinalResult(resultsFile, anyLightText, delimit)
+if DEBUG: print("Final result: ", anyLightText)
+if DEBUG: print(DELIMITER1)
