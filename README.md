@@ -32,7 +32,29 @@ To operate, the device is switched on it is place inside the camera the rear cov
   - *The LED's on the BH1745 are set ON for light detected (Fail) or OFF for light not detected (Pass)*
   - *The LED's on the Tiny2040 are set to RED for light detected (Fail) or Green for light not detected (Pass)* 
     - *The Tiny2040 LED's can be viewed thru the side of the case*
-    - 
+
+### Key parameters towards start of code used to control functionality
+
+DEBUG  = True		#	True = Very vebose REPL debug messages oe execution progress messages
+
+or
+
+DEBUG  = False	#	False = No REPL debug messages or progress messages
+
+LED_SLEEP    = 0.5	# startup LED flash delay 
+FLASH_LOOPS  = 5		# startup LED flash count
+
+START_DELAY  = 20 	#	delay after LEDS flash before readings start to be taken
+LOOPS        = 10		#	number of reading to be taken
+LOOPS_LIGHTS = 2		#	number of readings at start and end taken with bh1745 sensor LED on (test readings)
+
+READING_WAIT = 0.5	#	delay before readings taken in loop
+LOOP_WAIT    = 2		#	delay at end of oop before next loop
+
+estTime = START_DELAY + (LOOPS * (LOOP_WAIT + READING_WAIT + READING_WAIT))		#	etimated total test time in seconds
+
+Any questions, feel free to ask
+
 ### Items Used:
 
 - Processor   [Tiny2040 RP2040 development board](https://shop.pimoroni.com/products/tiny-2040?variant=39560012234835)
