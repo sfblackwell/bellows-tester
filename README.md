@@ -45,10 +45,13 @@ LED_SLEEP    = 0.5	# startup LED flash delay
 FLASH_LOOPS  = 5		# startup LED flash count
 
 START_DELAY  = 20 	#	delay after LEDS flash before readings start to be taken
+
 LOOPS        = 10		#	number of reading to be taken
+
 LOOPS_LIGHTS = 2		#	number of readings at start and end taken with bh1745 sensor LED on (test readings)
 
 READING_WAIT = 0.5	#	delay before readings taken in loop
+
 LOOP_WAIT    = 2		#	delay at end of oop before next loop
 
 estTime = START_DELAY + (LOOPS * (LOOP_WAIT + READING_WAIT + READING_WAIT))		#	etimated total test time in seconds
