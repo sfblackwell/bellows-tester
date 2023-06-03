@@ -1,5 +1,5 @@
-DEBUG  = True
-#DEBUG  = False
+#DEBUG  = True		#	True = Very vebose REPL debug messages
+DEBUG  = False		#	False = No REPL debug messages
 
 if DEBUG: print("\n===> Starting Bellows Light Sensor Code\n")
 
@@ -11,24 +11,25 @@ import pimoroni_i2c
 import breakout_bh1745
 import machine 
 
-START_LEDS	 = False
-START_DELAY  = 20
-LOOPS        = 10
-LOOPS_LIGHTS = 2
+LED_SLEEP    = 0.5		# 	startup LED flash delay 
+FLASH_LOOPS  = 5		# 	startup LED flash count
+
+START_DELAY  = 20 		#	delay after LEDS flash before readings start to be taken
+LOOPS        = 10		#	number of reading to be taken
+LOOPS_LIGHTS = 2		#	number of readings at start and end taken with bh1745 sensor LED on (test readings)
+
 LED_ON_LOW   = LOOPS_LIGHTS
 LED_ON_HIGH  = (LOOPS - LOOPS_LIGHTS) - 1
 
-READING_WAIT = 0.5
-LOOP_WAIT    = 2
+READING_WAIT = 0.5		#	delay before readings taken in loop
+LOOP_WAIT    = 2		#	delay at end of oop before next loop
 
-LED_SLEEP    = 0.5
-FLASH_LOOPS  = 5
+estTime = START_DELAY + (LOOPS * (LOOP_WAIT + READING_WAIT + READING_WAIT))		#	etimated total test time in seconds
+
+if DEBUG: print("===> Estimated test duration once sensor LED's stop flashing", estTime)
 
 DELIMITER0 = "*******************************"
 DELIMITER1 = "==============================="
-
-estTime = START_DELAY + (LOOPS * (LOOP_WAIT + READING_WAIT + READING_WAIT))
-if DEBUG: print("===> Estimated test duration once sensor LED's stop flashing", estTime)
 
 try:
     LIGHTSENSOR = {"sda": 0, "scl": 1}
@@ -141,14 +142,22 @@ for loop in range(0,LOOPS):
     ts     = timeString.format(phour, pminute, psecond, pyear, pmonth, pday)
     
     if loop < LED_ON_LOW or loop > LED_ON_HIGH:
+        #
+        #	test bh1745 sensor is woking by doing a loop with LED on
+        #        
         bh1745.leds(True)
         led = "LED:        On"
         ledOn = True
+        if DEBUG: print("===> test loop with bh1745 sensor LED on")
     else:
+        #
+        #	actual reading with bh1745 sensor LED off
+        #        
         bh1745.leds(False)
         led = "LED:        Off"
         ledOn = False
-    
+        if DEBUG: print("===> proper reading with bh1745 sensor LED off")
+        
     #	get a light reading
  
     time.sleep(READING_WAIT)  
